@@ -68,7 +68,7 @@
 					$redis = $this->_redis;
 					$key = 'goods_list_'.$id;
 					$redis->clearlist($key);//清空redis队列
-					for($i=1;$i<=$count;$i++){//循环将商品的剩余数量一个一个加入队列
+					for($i=1;$i<=$count;$i++){//循环将商品的剩余数量从右一个一个加入队列
 						$redis->addRlist($key,1);
 					}
 					$this->ajaxreturn(['status'=>1,'info'=>'编辑成功']);

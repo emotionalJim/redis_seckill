@@ -164,7 +164,7 @@ class seckill extends common
             return false;
         }
         $key = 'goods_list_' . $goodsInfo['id'];
-		$check = $this->_redis->getHandel()->lpop($key); 
+		$check = $this->_redis->getHandel()->lpop($key); //左边截取一个，看是否存在
         if (!$check) {
             $log_data = [
                 'goods_id' => $goodsInfo['id'],
@@ -186,7 +186,7 @@ class seckill extends common
         $gid = $goodsInfo['id'];
         $sql = 'UPDATE goods SET counts = counts - 1 WHERE id = ' . $gid;
         $this->_goodsModel->exect($sql); //商品库存-1
-        $left_count = $this->_redis->getHandel()->lsize($key); //当前列表数量
+        $left_count = $this->_redis->getHandel()->lsize($key); //当前列表数量，此数量为从左边截取过后的剩余数量
         $log_data = [
             'goods_id' => $goodsInfo['id'],
             'add_time' => time(),

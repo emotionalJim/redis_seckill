@@ -116,9 +116,6 @@
 		public function getHandel(){
 			return $this->_redis;
 		}
-
-
-		
 	}
 
 
